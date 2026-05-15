@@ -1,0 +1,73 @@
+﻿<Window x:Class="pr16_v1_Savitsin.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:pr16_v1_Savitsin"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="750" Width="800">
+
+    <Window.Resources>
+        <DataTemplate x:Key="CategoryHeader">
+            <Border Background="#E0E0E0" Padding="10,5" Margin="0,5,0,0" CornerRadius="5">
+                <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="#111111" FontSize="18"/>
+            </Border>
+        </DataTemplate>
+
+        <CollectionViewSource x:Key="GroupedItems">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Speciality"/>
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+    </Window.Resources>
+
+    <Grid>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Height="650" Width="400" VerticalAlignment="Top" Margin="221,19,0,-100">
+            <Label Content="Информация о студентах" Background="Blue" FontSize="20" HorizontalAlignment="Center" Width="400"/>
+            <TextBox x:Name="txtInput" ToolTip="Введите имя студента" FontSize="24" Height="30" TextWrapping="Wrap"/>
+            <ComboBox x:Name="comboBoxGroup" ToolTip="Выберите группу" HorizontalAlignment="Left" Height="30" Width="400">
+                <ComboBoxItem>ПР-21</ComboBoxItem>
+                <ComboBoxItem>ДЗ-21</ComboBoxItem>
+                <ComboBoxItem>ГД-21</ComboBoxItem>
+            </ComboBox>
+            <ComboBox x:Name="comboBoxSpeciality" ToolTip="Выберите специальность" HorizontalAlignment="Left" Height="30" Width="400" >
+                <ComboBoxItem>Программист</ComboBoxItem>
+                <ComboBoxItem>Дизайнер</ComboBoxItem>
+                <ComboBoxItem>Строитель</ComboBoxItem>
+            </ComboBox>
+            <ComboBox x:Name="comboBoxSubject" ToolTip="Выберите предмет" HorizontalAlignment="Left" Height="30" Width="400" >
+                <ComboBoxItem>Математика</ComboBoxItem>
+                <ComboBoxItem>Физкультура</ComboBoxItem>
+                <ComboBoxItem>Информатика</ComboBoxItem>
+            </ComboBox>
+            <ComboBox x:Name="comboBoxGrade" ToolTip="Выберите оценку" HorizontalAlignment="Left" Height="30" Width="400" >
+                <ComboBoxItem>2</ComboBoxItem>
+                <ComboBoxItem>3</ComboBoxItem>
+                <ComboBoxItem>4</ComboBoxItem>
+                <ComboBoxItem>5</ComboBoxItem>
+            </ComboBox>
+            <ComboBox x:Name="comboboxFilter" ToolTip="Выберите фильтрацию" Height="30">
+                <ComboBoxItem>Фильтрация по имени на "А"</ComboBoxItem>
+                <ComboBoxItem>Фильтрация по группе на "П"</ComboBoxItem>
+            </ComboBox>
+            <ComboBox x:Name="comboBoxSort" ToolTip="Выберите сортировку" HorizontalAlignment="Left" Width="400" Height="30">
+                <ComboBoxItem>Сортировка по имени</ComboBoxItem>
+                <ComboBoxItem>Сортировка по группе</ComboBoxItem>
+            </ComboBox>
+            <Button Content="Добавить в список" FontSize="16" Foreground="White" Click="Add_Click" Background="Green" Height="30"/>
+            <Button Content="Фильтрация списка" FontSize="16" Foreground="White" Click="Filter_Click" Background="Green" Height="30"/>
+            <Button Content="Сортировать список" FontSize="16" Foreground="White" Click="Sort_Click" Background="Green" Height="30"/>
+            <Button Content="Категоризация специальностей" FontSize="16" Foreground="White" Click="Category_Click" Background="Green" Height="30"/>
+            <Button Content="Сбросить фильтр" FontSize="16" Foreground="White" 
+        Click="ResetFilter_Click" Background="Green" Height="30"/>
+            <Button Content="Удалить выбранный элемент" FontSize="16" Foreground="White" Click="DelSelect_Click" Background="Red" Height="30"/>
+            <ListBox x:Name="lst_box" Height="194" 
+         ItemsSource="{Binding Source={StaticResource GroupedItems}}">
+                <ListBox.GroupStyle>
+                    <GroupStyle HeaderTemplate="{StaticResource CategoryHeader}"/>
+                </ListBox.GroupStyle>
+            </ListBox>
+            <Button Content="Очистить список" FontSize="16" Foreground="White" Click="Delete_lst" Background="Red" Height="30"/>
+        </StackPanel>
+    </Grid>
+</Window>
